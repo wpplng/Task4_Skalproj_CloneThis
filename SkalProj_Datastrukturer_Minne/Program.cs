@@ -149,6 +149,54 @@ namespace SkalProj_Datastrukturer_Minne
              * Create a switch with cases to enqueue items or dequeue items
              * Make sure to look at the queue after Enqueueing and Dequeueing to see how it behaves
             */
+            Queue<string> theQueue = new Queue<string>();
+
+            while (true)
+            {
+                Console.WriteLine("Enter +Name to enqueue or - to dequeue. Enter 0 to return to main menu.");
+                string input = Console.ReadLine()!;
+
+                if (input == "0") break;
+                if (string.IsNullOrEmpty(input))
+                {
+                    Console.WriteLine("Invalid input. Please enter +Name or -.");
+                    continue;
+                }
+
+                char nav = input[0];
+
+                switch (nav)
+                {
+                    case '+':
+                        if(input.Length < 2)
+                        {
+                            Console.WriteLine("Please provide a value to enqueue.");
+                            continue;
+                        }
+
+                        string value = input.Substring(1).Trim(); // Get the rest of the input after the first character
+                        theQueue.Enqueue(value);
+                        Console.WriteLine($"Enqueued '{value}'. Count: {theQueue.Count}");
+                        Console.WriteLine($"Queue contents: {string.Join(", ", theQueue)}");
+
+                        break;
+                    case '-':
+                        if (theQueue.Count > 0)
+                        {
+                            string dequeuedValue = theQueue.Dequeue();
+                            Console.WriteLine($"Dequeued '{dequeuedValue}'. Count: {theQueue.Count}");
+                            Console.WriteLine($"Queue contents: {string.Join(", ", theQueue)}");
+                        }
+                        else
+                        {
+                            Console.WriteLine("Queue is empty, nothing to dequeue.");
+                        }
+                        break;
+                    default:
+                        Console.WriteLine("Please use '+' to enqueue or '-' to dequeue items from the queue.");
+                        break;
+                }
+            }
         }
 
         /// <summary>
