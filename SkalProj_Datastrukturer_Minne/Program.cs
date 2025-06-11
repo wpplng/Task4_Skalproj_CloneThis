@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Threading.Tasks;
+using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace SkalProj_Datastrukturer_Minne
 {
@@ -72,12 +74,69 @@ namespace SkalProj_Datastrukturer_Minne
              * Below you can see some inspirational code to begin working.
             */
 
-            //List<string> theList = new List<string>();
-            //string input = Console.ReadLine();
-            //char nav = input[0];
-            //string value = input.substring(1);
+            // 1.Skriv klart implementationen av ExamineList-metoden så att undersökningen blir genomförbar.
+            // Svar: Implementerad nedan.
 
-            //switch(nav){...}
+            // 2.När ökar listans kapacitet ? (Alltså den underliggande arrayens storlek)
+            // Svar: Listans kapacitet får ett värde när listan skapas. Den ökas sedan när antalet element
+            // överstiger den nuvarande kapaciteten. En ny större array skapas.
+
+            // 3.Med hur mycket ökar kapaciteten?
+            // Svar: Kapaciteten ökar med det dubbla värdet av den nuvarande kapaciteten när den överskrids.
+            // Om kapaciteten är 4, blir den 8 när den ökas.
+
+            // 4.Varför ökar inte listans kapacitet i samma takt som element läggs till?
+            // Svar: Det vore ineffektivt att öka kapaciteten med varje nytt element, eftersom det skulle
+            // leda till många minnesallokeringar. Att göra det i större steg (t.ex. dubbla kapaciteten)
+            // minskar antalet allokeringar och förbättrar prestandan.
+
+            // 5.Minskar kapaciteten när element tas bort ur listan?
+            // Svar: Nej, kapaciteten minskar inte automatiskt när element tas bort.
+
+            // 6.När är det då fördelaktigt att använda en egendefinierad array istället för en lista?
+            // Svar: Det är fördelaktigt att använda en egendefinierad array när man har en fast storlek på datamängden,
+            // dvs när man vet antalet element i förväg.
+
+            List<string> theList = new List<string>();
+
+            while (true)
+            {
+                Console.WriteLine("Enter +Name to add or -Name to remove. Enter 0 to return to main menu.");
+                string input = Console.ReadLine()!;
+
+                if (input == "0") break; // Exit to main menu
+                if (string.IsNullOrEmpty(input) || input.Length < 2)
+                {
+                    Console.WriteLine("Invalid input. Please enter +Name or -Name.");
+                    continue;
+                }
+
+                char nav = input[0];
+                string value = input.Substring(1);
+
+                switch (nav)
+                {
+                    case '+':
+                        theList.Add(value);
+                        Console.WriteLine($"Added '{value}' to the list. Count: {theList.Count}, Capacity: {theList.Capacity}");
+                        break;
+                    case '-':
+                        if (theList.Remove(value))
+                        {
+                            Console.WriteLine($"Removed '{value}' from the list. Count: {theList.Count}, Capacity: {theList.Capacity}");
+                        }
+                        else
+                        {
+                            Console.WriteLine($"'{value}' not found in the list.");
+                        }
+                        break;
+                    default:
+                        Console.WriteLine("Please use '+' to add or '-' to remove items from the list.");
+                        break;
+                }
+
+            }
+           
         }
 
         /// <summary>
