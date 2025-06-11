@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Diagnostics.Metrics;
+using System.Reflection;
 using System.Threading.Tasks;
 using static System.Runtime.InteropServices.JavaScript.JSType;
 
@@ -209,6 +211,90 @@ namespace SkalProj_Datastrukturer_Minne
              * Create a switch with cases to push or pop items
              * Make sure to look at the stack after pushing and and poping to see how it behaves
             */
+
+            // 1.Simulera ännu en gång ICA-kön på papper. Denna gång med en stack.
+            // Varför är det inte så smart att använda en stack i det här fallet?
+            // Svar: Eftersom en stack är LIFO (Last In, First Out) så skulle den inte fungera bra för en kö där.
+            // Den som kommer sist till kön blir först att betjänas.
+
+            // 2.Implementera en ReverseText-metod som läser in en sträng från användaren och med hjälp av en stack
+            // vänder ordning på teckenföljden för att sedan skriva ut den omvända strängen till användaren.
+            // Svar: Se implementering nedan
+
+            Stack<string> theStack = new Stack<string>();
+
+            while (true)
+            {
+                Console.WriteLine("Enter +Name to push or - to pop. Enter x for reverse text. Enter 0 to return to main menu.");
+                string input = Console.ReadLine()!;
+
+                if (input == "0") break;
+                if (string.IsNullOrEmpty(input))
+                {
+                    Console.WriteLine("Invalid input. Please enter +Name or -.");
+                    continue;
+                }
+
+                char nav = input[0];
+
+                switch (nav)
+                {
+                    case '+':
+                        if(input.Length < 2)
+                        {
+                            Console.WriteLine("Please provide a value to push.");
+                            continue;
+                        }
+                        string value = input.Substring(1).Trim(); // Get the rest of the input after the first character
+                        theStack.Push(value);
+                        Console.WriteLine($"Pushed '{value}' onto the stack. Count: {theStack.Count}");
+                        Console.WriteLine($"Stack contents: {string.Join(", ", theStack)}");
+                        break;
+                    case '-':
+                        if (theStack.Count > 0)
+                        {
+                            string poppedValue = theStack.Pop();
+                            Console.WriteLine($"Popped '{poppedValue}' from the stack. Count: {theStack.Count}");
+                            Console.WriteLine($"Stack contents: {string.Join(", ", theStack)}");
+                        }
+                        else
+                        {
+                            Console.WriteLine("Stack is empty, nothing to pop.");
+                        }
+                        break;
+                    case 'x':
+                        ReverseText();
+                        break;
+                    default:
+                        Console.WriteLine("Please use '+' to push or '-' to pop items from the stack, or x to reverse text.");
+                        break;
+                }
+            }
+        }
+
+        static void ReverseText()
+        {
+            Console.WriteLine("Enter a text to reverse:");
+            string input = Console.ReadLine()!;
+            if (string.IsNullOrEmpty(input))
+            {
+                Console.WriteLine("No text provided to reverse.");
+                return;
+            }
+
+            Stack<char> stack = new Stack<char>();
+
+            foreach (char c in input)
+            {
+                stack.Push(c);
+            }
+
+            Console.Write("Reversed: ");
+            while (stack.Count > 0)
+            {
+                Console.Write(stack.Pop());
+            }
+            Console.WriteLine();
         }
 
         static void CheckParanthesis()
