@@ -180,7 +180,6 @@ namespace SkalProj_Datastrukturer_Minne
                         theQueue.Enqueue(value);
                         Console.WriteLine($"Enqueued '{value}'. Count: {theQueue.Count}");
                         Console.WriteLine($"Queue contents: {string.Join(", ", theQueue)}");
-
                         break;
                     case '-':
                         if (theQueue.Count > 0)
@@ -305,8 +304,60 @@ namespace SkalProj_Datastrukturer_Minne
              * Example of incorrect: (()]), [), {[()}],  List<int> list = new List<int>() { 1, 2, 3, 4 );
              */
 
-        }
+            // 1.Skapa med hjälp av er nya kunskap funktionalitet för att kontrollera en välformad sträng på papper.
+            // Du ska använda dig av någon eller några av de datastrukturer vi precis gått igenom.Vilken datastruktur använder du?
+            // Svar: Jag använder en stack för att kontrollera välformade parenteser, eftersom den följer LIFO-principen.
 
+            // 2.Implementera funktionaliteten i metoden CheckParentheses. Låt programmet läsa in en sträng från användaren och
+            // returnera ett svar som reflekterar huruvida strängen är välformad eller ej.
+            // Svar: Se implementering nedan
+
+            Console.WriteLine("Enter a string to check for balanced parentheses:");
+            string input = Console.ReadLine()!;
+
+            if (string.IsNullOrEmpty(input))
+            {
+                Console.WriteLine("No input provided.");
+                return;
+            }
+
+            Stack<char> stack = new Stack<char>();
+            bool isBalanced = true;
+
+            foreach (char c in input)
+            { 
+                // om öppnande parantes, lägg till i stacken
+                if(c == '(' || c == '{' || c == '[')
+                {
+                    stack.Push(c);
+                }
+                // om stängande parantes - kolla om stacken innehåller något isf gör en kontroll om de matchar
+                else if (c == ')' || c == '}' || c == ']')
+                {
+                    if (stack.Count == 0)
+                    {
+                        isBalanced = false;
+                        break;
+                    }
+                    char top = stack.Pop();
+                    if ((c == ')' && top != '(') ||
+                        (c == '}' && top != '{') ||
+                        (c == ']' && top != '['))
+                    {
+                        isBalanced = false;
+                        break;
+                    }
+                }
+            }
+
+            // om stacken fortfarande innehåller något är den inte balanserad
+            if (stack.Count > 0)
+            {
+                isBalanced = false ; 
+            }
+
+            Console.WriteLine(isBalanced ? "The parantheses in the string is balanced" : "The parantheses is not balanced.");
+        }
     }
 }
 
