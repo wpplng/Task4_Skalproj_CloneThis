@@ -361,3 +361,21 @@ namespace SkalProj_Datastrukturer_Minne
     }
 }
 
+//Frågor:
+// 1.Hur fungerar stacken och heapen? Förklara gärna med exempel eller skiss på dess grundläggande funktion.
+// Svar: Stacken är en minnesstruktur som lagrar data i en LIFO-ordning (Last In, First Out). Den används för att lagra lokala
+// variabler och funktionsanrop. Den kan ses som en mängd boxar som är staplade på varandra.
+// Heap är en annan minnesstruktur, en trädstruktur, som används för dynamisk minnesallokering. Det är en struktur där allt är tillgängligt
+// på en gång och med enkel åtkomst där objekt kan skapas och förstöras under programmets gång. Stacken har en fast storlek medan heapen kan
+// växa och krympa dynamiskt.
+
+// 2. Vad är Value Types respektive Reference Types och vad skiljer dem åt?
+// Svar: Value Types är datatyper som lagrar värden direkt där de deklareras (t.ex. int, float, bool). De kan lagras både på stacken och
+// heapen beroende på var de deklareras. Reference Types är datatyper som alltid lagras på heapen och innehåller en referens till objektet
+// i heapen (t.ex. string, class, object). Det som skiljer dem åt är att Value Types lagrar värdet direkt medan Reference Types lagrar en referens.
+
+// 3. Följande metoder (se bild nedan) genererar olika svar. Den första returnerar 3, den andra returnerar 4, varför?
+// Svar: Den första metoden returnerar 3 eftersom den returnerar värdet av x som är 3. y sätts till värdet av x men x förändras aldrig.
+// Den andra metoden returnerar 4 eftersom den skapas som en referens till x. När y ändras till 4, ändras även x eftersom de refererar till
+// samma minnesadress då de sätts till samma objekt genom y = x. Det första exemplet är en value type (int) och det andra är en reference type (object).
+
