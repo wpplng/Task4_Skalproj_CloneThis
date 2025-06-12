@@ -104,7 +104,7 @@ namespace SkalProj_Datastrukturer_Minne
             while (true)
             {
                 Console.WriteLine("Enter +Name to add or -Name to remove. Enter 0 to return to main menu.");
-                string input = Console.ReadLine()!;
+                string input = Console.ReadLine() ?? string.Empty;
 
                 if (input == "0") break; // Exit to main menu
                 if (string.IsNullOrEmpty(input) || input.Length < 2)
@@ -156,7 +156,7 @@ namespace SkalProj_Datastrukturer_Minne
             while (true)
             {
                 Console.WriteLine("Enter +Name to enqueue or - to dequeue. Enter 0 to return to main menu.");
-                string input = Console.ReadLine()!;
+                string input = Console.ReadLine() ?? string.Empty;
 
                 if (input == "0") break;
                 if (string.IsNullOrEmpty(input))
@@ -225,7 +225,7 @@ namespace SkalProj_Datastrukturer_Minne
             while (true)
             {
                 Console.WriteLine("Enter +Name to push or - to pop. Enter x for reverse text. Enter 0 to return to main menu.");
-                string input = Console.ReadLine()!;
+                string input = Console.ReadLine() ?? string.Empty;
 
                 if (input == "0") break;
                 if (string.IsNullOrEmpty(input))
@@ -274,7 +274,7 @@ namespace SkalProj_Datastrukturer_Minne
         static void ReverseText()
         {
             Console.WriteLine("Enter a text to reverse:");
-            string input = Console.ReadLine()!;
+            string input = Console.ReadLine() ?? string.Empty; 
             if (string.IsNullOrEmpty(input))
             {
                 Console.WriteLine("No text provided to reverse.");
@@ -313,7 +313,7 @@ namespace SkalProj_Datastrukturer_Minne
             // Svar: Se implementering nedan
 
             Console.WriteLine("Enter a string to check for balanced parentheses:");
-            string input = Console.ReadLine()!;
+            string input = Console.ReadLine() ?? string.Empty;
 
             if (string.IsNullOrEmpty(input))
             {
